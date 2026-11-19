@@ -1,5 +1,5 @@
 class DrinksController < ApplicationController
-  before_action :set_drink, only: %i[ show edit update destroy ]
+  before_action :set_drink, only: %i[ show edit update destroy add_to_cart ]
 
   # GET /drinks
   def index
@@ -43,6 +43,11 @@ class DrinksController < ApplicationController
   def destroy
     @drink.destroy!
     redirect_to drinks_path, notice: "Drink was successfully destroyed.", status: :see_other
+  end
+
+  def add_to_cart
+    Current.session.user.cart.add_drink(@drink)
+    redirect_to drinks_path, notice: "#{@drink.name} added to your cart.", status: :see_other
   end
 
   private

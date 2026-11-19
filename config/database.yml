@@ -11,10 +11,13 @@ default: &default
 
 development:
   adapter: mysql2
-  host: 127.0.0.1
-  username: cpnv
-  password: cpnv
-  database: drink_master
+  encoding: utf8mb4
+  host: <%= ENV.fetch("DB_HOST", "127.0.0.1").to_json %>
+  port: <%= Integer(ENV.fetch("DB_PORT", "3306"), 10) %>
+  socket: <%= ENV["DB_SOCKET"].to_json %>
+  username: <%= ENV.fetch("DB_USER", "cpnv").to_json %>
+  password: <%= ENV["DB_PASSWORD"].to_json %>
+  database: <%= ENV.fetch("DB_NAME", "drink_master").to_json %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

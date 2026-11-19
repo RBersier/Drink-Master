@@ -21,4 +21,8 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 end
 
+group :development do
+  gem "dotenv-rails"
+end
+
 gem "bcrypt", "~> 3.1"

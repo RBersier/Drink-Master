@@ -10,6 +10,6 @@ class User < ApplicationRecord
 
   # Override so that the first access will create it
   def cart
-    super || create_cart
+    super || with_lock { reload_cart || create_cart! }
   end
 end

@@ -5,7 +5,7 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    @cart.cart_items.destroy_all
+    @cart.with_lock { @cart.cart_items.destroy_all }
     redirect_to action: :show
   end
 
